@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+{% extends "RoboStockApp/base.html" %}
+  {% block body_block %}
+  <div class="container">
+    <div class="jumbotron">
+      <h1>Welcome To RoboStock!</h1>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    </div>
+
+  </div>
+  <div class="container">
+    <h2>Stock Market Indexes</h2>
+    <p>This page provides an overivew of the stock market indexes</p>
+    <p>Major Stock Market Indexes</p>
+  </div>
+
+  <!--Load the AJAX API-->
+  <!-- AJAX is short for "Asynchronous JavaScript and XML" is a set of web develompent techniques using many web technologies on the client-side to create asynchronous web applications -->
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script type="text/javascript">
+
+    // Load the Visualization API and the corechart package.
+    google.charts.load('current', {'packages':['corechart']});
+
+    // Set a callback to run when the Google Visualization API is loaded.
+    google.charts.setOnLoadCallback(drawChart);
+    google.charts.setOnLoadCallback(drawChart1);
+    google.charts.setOnLoadCallback(drawChart2);
+
+    // Callback that creates and populates a data table,
+    // instantiates the pie chart, passes in the data and
+    // draws it.
+    function drawChart() {
+
+      // data : Creates the data table.
+
+      //{{values|safe}} : list of list containing points for the chart
+      //format of {{values|safe}} can be seen in : https://developers.google.com/chart/interactive/docs/gallery/scatterchart
+      var data = google.visualization.arrayToDataTable({{values|safe}});
+
+      // Set chart options
+      var options = {
+      //{{h_title|safe}} : Title for horizontal axis
+      //{{v_title|safe}} : Title for vertical axis
+        title: 'S&P 500 (^GSPC)',
+        hAxis: {title: {{h_title|safe}}},
+        vAxis: {title: {{v_title|safe}}},
+        legend: 'none'
+      };
+
+      // Instantiate and draw our chart, passing in some options.
+      // var chart = new google.visualization.ScatterChart(document.getElementById('chart_div'));
+      var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+      chart.draw(data, options);
+    }
+
+    function drawChart1() {
+
+      // data : Creates the data table.
+
+      //{{values|safe}} : list of list containing points for the chart
+      //format of {{values|safe}} can be seen in : https://developers.google.com/chart/interactive/docs/gallery/scatterchart
+      var data1 = google.visualization.arrayToDataTable({{values1|safe}});
+
+      // Set chart options
+      var options1 = {
+      //{{h_title|safe}} : Title for horizontal axis
+      //{{v_title|safe}} : Title for vertical axis
+        title: 'NASDAQ Composite (^IXIC)',
+        hAxis: {title: {{h_title1|safe}}},
+        vAxis: {title: {{v_title1|safe}}},
+        legend: 'none'
+      };
+
+      // Instantiate and draw our chart, passing in some options.
+      // var chart = new google.visualization.ScatterChart(document.getElementById('chart_div'));
+      var chart = new google.visualization.LineChart(document.getElementById('chart_div1'));
+      chart.draw(data1, options1);
+    }
+
+    function drawChart2() {
+
+      // data : Creates the data table.
+
+      //{{values|safe}} : list of list containing points for the chart
+      //format of {{values|safe}} can be seen in : https://developers.google.com/chart/interactive/docs/gallery/scatterchart
+      var data2 = google.visualization.arrayToDataTable({{values2|safe}});
+
+      // Set chart options
+      var options2 = {
+      //{{h_title|safe}} : Title for horizontal axis
+      //{{v_title|safe}} : Title for vertical axis
+        title: 'Dow Jones Industrial Average (^DJI)',
+        hAxis: {title: {{h_title2|safe}}},
+        vAxis: {title: {{v_title2|safe}}},
+        legend: 'none'
+      };
+
+      // Instantiate and draw our chart, passing in some options.
+      // var chart = new google.visualization.ScatterChart(document.getElementById('chart_div'));
+      var chart = new google.visualization.LineChart(document.getElementById('chart_div2'));
+      chart.draw(data2, options2);
+    }
+
+  </script>
+  <body>
+    <div class="container">
+      <p>S&P 500: {{ SP_Close }}</p>
+      <p>Day Change: {{ SP_DayChange }}</p>
+      <p>Percentage Day Change: {{ SP_PercentageChange }}</p>
+    <div/>
+    <div id="chart_div" style="width: 1200px; height: 750px;"></div>
+    <div id="chart_div1" style="width: 1200px; height: 750px;"></div>
+    <div id="chart_div2" style="width: 1200px; height: 750px;"></div>
+  </body>
+
+  {% endblock %}
