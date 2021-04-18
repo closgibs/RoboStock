@@ -1,11 +1,12 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en" dir="ltr">
 <head>
   <meta charset="utf-8">
   <title>RoboStock</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
   integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-
+  <link rel="stylesheet" href="{% static "RoboStockApp/css/mystyle.css" %}"/>
 </head>
 
 <body>
@@ -41,20 +42,19 @@
             Additional Resources
           </a>
           <div class="dropdown-menu active" aria-labelledby="navbar-dropdown-menu">
-            <a class="dropdown-item active" href="#">Action</a>
-            <a class="dropdown-item active" href="https://finance.yahoo.com/">Go to Google</a>
-            <a class="dropdown-item active" href="#">Something else here</a>
+            <a class="dropdown-item active" href="#">Machine Learning Algorithm</a>
+            <a class="dropdown-item active" href="https://finance.yahoo.com/">Go to Yahoo Finance</a>
 
             <!-- Use this to separate a new link: -->
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Separated link</a>
+            <a class="dropdown-item" href="#">About</a>
           </div>
         </div>
 
         <!-- SEARCH BAR -->
-        <form class="form-inline">
-          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline my-2 my-sm-0" type="submit">Submit</button>
+        <form action = "https://www.google.com/search" method = "GET" class="form-inline">
+          <input class="form-control mr-sm-2" type="search" name = "q" placeholder="Google Search" aria-label="Search">
+          <button class="btn btn-outline my-2 my-sm-0" type="submit" value = "Google Search">Submit</button>
         </form>
 
       </div> <!-- /.navbar-nav, left-hand content -->

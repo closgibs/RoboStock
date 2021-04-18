@@ -18,8 +18,7 @@
   <form action="{% url 'RoboStockApp:MLpredictions' %}" method="post">
       {% csrf_token %}
 
-      <label for="cars">Choose Stock Quote:</label>
-
+      <label for="stock_symbol">Choose Stock Quote:</label>
       <select name="stock_quote" id="stock_quote">
         <option value="AAPL">AAPL</option>
         <option value="TSLA">TSLA</option>
@@ -27,24 +26,13 @@
         <option value="MRNA">MRNA</option>
       </select>
 
-      <label for="cars">Epochs:</label>
-
-      <select name="epochs" id="epochs">
-        <option value= "1" >1</option>
-        <option value= "2" >2</option>
-        <option value= "3" >3</option>
-        <option value= "4" >4</option>
-      </select>
-
       <label for="start">Start date:</label>
-
-      <input type="date" id="start" name="start"
+      <input type="date" id="start" name="start_date"
               value=""
               min="2012-01-01" max="2021-04-29">
 
       <label for="end">End Date:</label>
-
-      <input type="date" id="end" name="end"
+      <input type="date" id="end" name="end_date"
               value=""
               min="2012-01-01" max="2021-04-29">
 

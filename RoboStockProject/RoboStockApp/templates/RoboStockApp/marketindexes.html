@@ -11,8 +11,10 @@
 
   </div>
   <div class="container">
-    <h2>Stock Market Indexes</h2>
-    <p>This page provides an overivew of the stock market indexes</p>
+    <h2>U.S. Stock Market Indexes</h2>
+    <h3>The S&P 500</h3>
+    <p>The S&P 500 index is composed of 500 of the top companies in the U.S.
+        Stock Market.</p>
     <p>Major Stock Market Indexes</p>
   </div>
 
@@ -106,13 +108,29 @@
 
   </script>
   <body>
-    <div class="container">
-      <p>S&P 500: {{ SP_Close }}</p>
-      <p>Day Change: {{ SP_DayChange }}</p>
-      <p>Percentage Day Change: {{ SP_PercentageChange }}</p>
-    <div/>
+
+    <div class="container-fluid">
+      <h3>S&P 500 (^GSPC)</h3>
+      <h5 style="display: inline;">{{ SP_Close }}</h5>
+      <b id = 'SPDayChange' style="display: inline;">{{ SP_DayChange }}</b>
+      <b id = 'SPDayPercentageChange' style="display: inline;">({{ SP_PercentageChange }} %)</b>
+    </div>
     <div id="chart_div" style="width: 1200px; height: 750px;"></div>
+
+    <div class="container-fluid">
+      <h3>NASDAQ Composite (^IXIC)</h3>
+      <h5 style="display: inline;">{{ NASDAQ_Close }}</h5>
+      <b id = 'NASDAQDayChange' style="display: inline;">{{ NASDAQ_DayChange }}</b>
+      <b id = 'NASDAQDayPercentageChange' style="display: inline;">({{ NASDAQ_PercentageChange }} %)</b>
+    </div>
     <div id="chart_div1" style="width: 1200px; height: 750px;"></div>
+
+    <div class="container-fluid">
+      <h3>Dow Jones Industrial Average ('^DJI')</h3>
+      <h5 style="display: inline;">{{ DOWJONES_Close }}</h5>
+      <b id = 'DOWJONESDayChange' style="display: inline;">{{ DOWJONES_DayChange }}</b>
+      <b id = 'DOWJONESDayPercentageChange' style="display: inline;">({{ DOWJONES_PercentageChange }} %)</b>
+    </div>
     <div id="chart_div2" style="width: 1200px; height: 750px;"></div>
   </body>
 

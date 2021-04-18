@@ -80,7 +80,20 @@ def marketindexes (request):
     SPdayChange = round(SPtodayClose - SPyesterdayClose, 2)
     SPpercentageChange = round((SPdayChange/SPyesterdayClose) * 100, 2)
 
-    print(SPdayChange, SPpercentageChange)
+    #SPdayChange = -56
+    #SPpercentageChange = -.05
+
+    if SPdayChange >= 0:
+        SPdayChangeSign = "+"
+    else:
+        SPdayChangeSign = ""
+
+    SPdayChange = str(SPdayChange)
+    SPpercentageChange = str(SPpercentageChange)
+
+    SPdayChange = SPdayChangeSign + SPdayChange
+    SPpercentageChange = SPdayChangeSign + SPpercentageChange
+
     ########## S&P 500 Index Day Change END ##########
 
     ########## NASDAQ Data ##########
@@ -109,9 +122,26 @@ def marketindexes (request):
     v_var_JSON1 = json.dumps(v_var1)
     #modified_data : JSON string corresponding to  data
     modified_data1 = json.dumps(data1)
+    ########## NASDAQ Data END ##########
+
+    ########## NASDAQ Index Day Change ##############
+
+    NASDAQstock_key = '^IXIC'
+    NASDAQdf = web.DataReader(NASDAQstock_key, data_source = 'yahoo', start = yesterday, end = now)
+    NASDAQdf = NASDAQdf['Close']
+    NASDAQdata = NASDAQdf.values.tolist()
+    NASDAQdata
+
+    NASDAQyesterdayClose = round(NASDAQdata[0], 2)
+    NASDAQtodayClose = round(NASDAQdata[1], 2)
+
+    NASDAQdayChange = round(NASDAQtodayClose - NASDAQyesterdayClose, 2)
+    NASDAQpercentageChange = round((NASDAQdayChange/NASDAQyesterdayClose) * 100, 2)
+
+    ########## NASDAQ Index Day Change END ##########
+
 
     ########## DOW JONES Data ##########
-
     #h_var : The title for horizontal axis
     h_var2 = "Date"
     #v_var : The title for horizontal axis
@@ -137,18 +167,49 @@ def marketindexes (request):
     v_var_JSON2 = json.dumps(v_var2)
     #modified_data : JSON string corresponding to  data
     modified_data2 = json.dumps(data2)
+    ########## DOW JONES Data END ##########
+
+    ########## DOW JONES Index Day Change ##############
+
+    DOWJONESstock_key = '^DJI'
+    DOWJONESdf = web.DataReader(DOWJONESstock_key, data_source = 'yahoo', start = yesterday, end = now)
+    DOWJONESdf = DOWJONESdf['Close']
+    DOWJONESdata = DOWJONESdf.values.tolist()
+    DOWJONESdata
+
+    DOWJONESyesterdayClose = round(DOWJONESdata[0], 2)
+    DOWJONEStodayClose = round(DOWJONESdata[1], 2)
+
+    DOWJONESdayChange = round(DOWJONEStodayClose - DOWJONESyesterdayClose, 2)
+    DOWJONESpercentageChange = round((DOWJONESdayChange/DOWJONESyesterdayClose) * 100, 2)
+
+    print(DOWJONESdayChange,DOWJONESpercentageChange)
+
+    ########## DOWN JONES Index Day Change END ##########
+
 
     #Finally all JSON strings are supplied to the charts.html using the
     # dictiory shown below so that they can be displayed on the home screen
-    return render(request,'RoboStockApp/marketindexes.html',{'values':modified_data,
-                                                                'h_title':h_var_JSON,
-                                                                'v_title':v_var_JSON,
-                                                                'SP_Close':SPtodayClose,
+    return render(request,'RoboStockApp/marketindexes.html',{'SP_Close':SPtodayClose,
                                                                 'SP_DayChange':SPdayChange,
                                                                 'SP_PercentageChange':SPpercentageChange,
+
+                                                                'values':modified_data,
+                                                                'h_title':h_var_JSON,
+                                                                'v_title':v_var_JSON,
+
+                                                                'NASDAQ_Close':NASDAQtodayClose,
+                                                                'NASDAQ_DayChange':NASDAQdayChange,
+                                                                'NASDAQ_PercentageChange':NASDAQpercentageChange,
+
                                                                 'values1':modified_data1,
                                                                 'h_title1':h_var_JSON1,
                                                                 'v_title1':v_var_JSON1,
+
+                                                                'DOWJONES_Close':DOWJONEStodayClose,
+                                                                'DOWJONES_DayChange':DOWJONESdayChange,
+                                                                'DOWJONES_PercentageChange':DOWJONESpercentageChange,
+
                                                                 'values2':modified_data2,
                                                                 'h_title2':h_var_JSON2,
                                                                 'v_title2':v_var_JSON2,})
@@ -281,14 +342,16 @@ def pltToSvg():
 
 def MLpredictions (request):
 
+    start = ""
+    end = ""
+    
     if request.method == 'POST':
 
         stock_quote = request.POST.get('stock_quote')
         start = request.POST.get('start')
         end =  request.POST.get('end')
-        epochs = int(request.POST.get('epochs'))
 
-        print(stock_quote,start,end,epochs)
+        print(stock_quote,start,end)
 
         df = web.DataReader(stock_quote, data_source = 'yahoo', start = start, end = end)
         #Get the number of rows and columns in the data set
@@ -352,7 +415,7 @@ def MLpredictions (request):
 
         #Train the model - MACHINE LEARNING!! :-)
         #What is epochs? the number of times a data set is passed forward and backwards through the model
-        model.fit(x_train, y_train, batch_size = 1, epochs = 2)#CHANGE epochs BACK TO 2!!!
+        model.fit(x_train, y_train, batch_size = 1, epochs = 2)
 
         #Create the testing data set
         #Create a new array containing scaled values from index 1543 to 2003 (why 1543 to 2003? bc that's the end of dataset)
@@ -388,8 +451,6 @@ def MLpredictions (request):
         valid = data[training_data_len:]
         valid['Predictions'] = predictions
 
-################################### NEW CODE #######################################
-
         #Set the 'Date' dataframe column equal to the data frame index
         train['Date'] = train.index
         valid['Date'] = valid.index
@@ -421,9 +482,11 @@ def MLpredictions (request):
 
         mod_data = json.dumps(data1)
 
-        return render(request,"RoboStockApp/mlpredictions.html",{'values':mod_data,\
-                                'h_title':h_var_JSON,'v_title':v_var_JSON,'chart_title':chart_title_JSON})
-######################## NEW CODE END ##############################################
+        return render(request,"RoboStockApp/mlpredictions.html",{'values':mod_data,
+                                                                    'h_title':h_var_JSON,
+                                                                    'v_title':v_var_JSON,
+                                                                    'chart_title':chart_title_JSON})
+
     else:
         return render(request, 'RoboStockApp/mlpredictions.html')
 
