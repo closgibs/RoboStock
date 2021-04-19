@@ -1,25 +1,30 @@
-
-
 #SPDayChange{
-  color: green;
+  color: #FF0000;
 }
 
 #SPDayPercentageChange{
-  color: green;
+  color: #FF0000;
 }
 
 #NASDAQDayChange{
-  color: green;
+  color: #FF0000;
 }
 
 #NASDAQDayPercentageChange{
-  color: green;
+  color: #FF0000;
 }
 
 #DOWJONESDayChange{
-  color: green;
+  color: #FF0000;
 }
 
 #DOWJONESDayPercentageChange{
-  color: green;
+  color: #FF0000;
+}
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
 }

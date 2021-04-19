@@ -27,6 +27,9 @@ from datetime import datetime, timedelta
 def index (request):
     return render(request,'RoboStockApp/index.html')
 
+def home (request):
+    return render(request,'RoboStockApp/home.html')
+
 def marketindexes (request):
     """
     This view returns the major stock market indexes
@@ -65,7 +68,7 @@ def marketindexes (request):
 
     ########## S&P 500 Index Day Change ##############
     now = datetime.today()
-    yesterday = datetime.today() - timedelta(days=2)
+    yesterday = datetime.today() - timedelta(days=4)
     now = str(now)
 
     stock_key = '^GSPC'
@@ -132,7 +135,7 @@ def marketindexes (request):
     NASDAQdata = NASDAQdf.values.tolist()
     NASDAQdata
 
-    NASDAQyesterdayClose = round(NASDAQdata[0], 2)
+    NASDAQyesterdayClose = round(NASDAQdata[0], 4)
     NASDAQtodayClose = round(NASDAQdata[1], 2)
 
     NASDAQdayChange = round(NASDAQtodayClose - NASDAQyesterdayClose, 2)
@@ -177,7 +180,7 @@ def marketindexes (request):
     DOWJONESdata = DOWJONESdf.values.tolist()
     DOWJONESdata
 
-    DOWJONESyesterdayClose = round(DOWJONESdata[0], 2)
+    DOWJONESyesterdayClose = round(DOWJONESdata[0], 4)
     DOWJONEStodayClose = round(DOWJONESdata[1], 2)
 
     DOWJONESdayChange = round(DOWJONEStodayClose - DOWJONESyesterdayClose, 2)
@@ -344,7 +347,7 @@ def MLpredictions (request):
 
     start = ""
     end = ""
-    
+
     if request.method == 'POST':
 
         stock_quote = request.POST.get('stock_quote')

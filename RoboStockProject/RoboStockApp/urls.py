@@ -6,6 +6,7 @@ app_name = 'RoboStockApp'
 
 urlpatterns = [
 #    path('',views.index,name = 'index'),
+    path('home/',views.home,name='home'),
     path('marketindexes/',views.marketindexes,name='marketindexes'),
     path('mlpredictions/',views.MLpredictions,name='MLpredictions'),
     path('user_login/',views.user_login,name='user_login'),
