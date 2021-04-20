@@ -108,7 +108,7 @@ def marketindexes (request):
     # to populate the Google chart.
     #Get the stock quote
     stock_key1 = '^IXIC'
-    df1 = web.DataReader(stock_key1, data_source = 'yahoo', start = '2020-01-01', end = now)
+    df1 = web.DataReader(stock_key1, data_source = 'yahoo', start = '2021-01-01', end = now)
     #Set the 'Date' column equal to the index
     df1['Date'] = df1.index
     #Change the timestamp to type string
@@ -153,7 +153,7 @@ def marketindexes (request):
     # to populate the Google chart.
     #Get the stock quote
     stock_key2 = '^DJI'
-    df2 = web.DataReader(stock_key2, data_source = 'yahoo', start = '2020-01-01', end = now)
+    df2 = web.DataReader(stock_key2, data_source = 'yahoo', start = '2021-01-01', end = now)
     #Set the 'Date' column equal to the index
     df2['Date'] = df2.index
     #Change the timestamp to type string
