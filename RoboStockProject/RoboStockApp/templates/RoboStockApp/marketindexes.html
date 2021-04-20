@@ -3,19 +3,23 @@
   {% block body_block %}
   <div class="container">
     <div class="jumbotron">
-      <h1>Welcome To RoboStock!</h1>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      <h1>Major Stock Exchange Indexes</h1>
+      <p>Stock Indexs are great tools for navigating the stock market and getting a general idea of the marekt's performance. Below are three of the most comonly used indexs.</p>
 
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      <h3>S&P 500</h3>
+      <p>Created by Poor's Publishing and Standards Statistics in 1957. It is a makret-cap weighted index. It is composed of the 500 largest and most important U.S. Stocks.</p>
+
+      <h3>NASDAQ Composite Index</h3>
+      <p>Created by National Associate of Security Dealers (NASD). Market-Capitalization weighted index. It includes ~3,000 of all the stocks listed on NASDAQ Stock Exchang.</p>
+
+      <h3>The Dow Jones Industrial Average</h3>
+      <p>Created by Charles Dow and Edward Jones in 1896. Price-weighted index of 30 large, well established, and actively traded U.S. Stocks. Higher price stocks have a bigger impact than lwoer priced stocks.</p>
     </div>
 
   </div>
   <div class="container">
     <h2>U.S. Stock Market Indexes</h2>
-    <h3>The S&P 500</h3>
-    <p>The S&P 500 index is composed of 500 of the top companies in the U.S.
-        Stock Market.</p>
-    <p>Major Stock Market Indexes</p>
+
   </div>
 
   <!--Load the AJAX API-->
@@ -49,7 +53,7 @@
         title: 'S&P 500 (^GSPC)',
         hAxis: {title: {{h_title|safe}}},
         vAxis: {title: {{v_title|safe}}},
-        legend: 'none'
+        legend: { position: 'bottom' }
       };
 
       // Instantiate and draw our chart, passing in some options.
@@ -73,7 +77,7 @@
         title: 'NASDAQ Composite (^IXIC)',
         hAxis: {title: {{h_title1|safe}}},
         vAxis: {title: {{v_title1|safe}}},
-        legend: 'none'
+        legend: { position: 'bottom' }
       };
 
       // Instantiate and draw our chart, passing in some options.
@@ -97,7 +101,7 @@
         title: 'Dow Jones Industrial Average (^DJI)',
         hAxis: {title: {{h_title2|safe}}},
         vAxis: {title: {{v_title2|safe}}},
-        legend: 'none'
+        legend: { position: 'bottom' }
       };
 
       // Instantiate and draw our chart, passing in some options.
