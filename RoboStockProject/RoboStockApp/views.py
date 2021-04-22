@@ -239,7 +239,7 @@ def watchlists (request):
 
         h_var = "Date"
 
-        v_var = "Points"
+        v_var = "Closing Stock Price USD ($)"
 
         h_var_JSON = json.dumps(h_var)
 
@@ -250,8 +250,8 @@ def watchlists (request):
         chart_title_JSON = json.dumps(stock_symbol)
 
         return render(request,'RoboStockApp/watchlists.html',{'values':modified_data,
-                                                                    'h_var':h_var_JSON,
-                                                                    'v_var':v_var_JSON,
+                                                                    'h_title':h_var_JSON,
+                                                                    'v_title':v_var_JSON,
                                                                     'title':chart_title_JSON})
     else:
         return render(request, 'RoboStockApp/watchlists.html')

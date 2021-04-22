@@ -3,6 +3,8 @@
   {% block body_block %}
   <div class="container">
     <div class="jumbotron">
+      <h1>Stock Watchlists</h1>
+      <p>Select a stock from the drop-down menu and query it's cloing price history</p>
     </div>
   <div class="container">
 
@@ -16,6 +18,11 @@
           <option value="TSLA">TSLA</option>
           <option value="GOOGL">GOOGL</option>
           <option value="MRNA">MRNA</option>
+          <option value="VZ">VZ</option>
+          <option value="FB">FB</option>
+          <option value="JNJ">JNJ</option>
+          <option value="NKE">NKE</option>
+          <option value="COKE">COKE</option>
         </select>
 
         <input type="submit" name="" value="Query Data">
@@ -61,7 +68,9 @@
               'height': 1200,
               'pieSliceText': 'value',
               'legend': 'right',
-              'title':{{title|safe}}
+              'title':{{title|safe}},
+              'hAxis':{title: {{h_title|safe}}},
+              'vAxis':{title: {{v_title|safe}}},
             }
           });
 
@@ -79,8 +88,8 @@
         <!--Div that will hold the dashboard-->
         <div id="dashboard_div">
           <!--Divs that will hold each control and chart-->
-          <div id="filter_div"></div>
           <div id="chart_div"></div>
+          <div id="filter_div"></div>
         </div>
       </body>
 
