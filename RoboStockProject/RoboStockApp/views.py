@@ -217,6 +217,45 @@ def marketindexes (request):
                                                                 'h_title2':h_var_JSON2,
                                                                 'v_title2':v_var_JSON2,})
 
+def watchlists (request):
+
+    if request.method == 'POST':
+
+        stock_symbol = request.POST.get('stock_quote')
+
+        df = web.DataReader(stock_symbol, data_source= 'yahoo', start = '2020-01-01', end = '2022-04-29')
+
+        data = df.filter(['Close'])
+
+        df['Date'] = df.index
+
+        df['Date'] = df['Date'].astype(str)
+
+        df = df[['Date','Close']]
+
+        data = df.values.tolist()
+
+        data.insert(0,['Date','Close'])
+
+        h_var = "Date"
+
+        v_var = "Points"
+
+        h_var_JSON = json.dumps(h_var)
+
+        v_var_JSON = json.dumps(v_var)
+
+        modified_data = json.dumps(data)
+
+        chart_title_JSON = json.dumps(stock_symbol)
+
+        return render(request,'RoboStockApp/watchlists.html',{'values':modified_data,
+                                                                    'h_var':h_var_JSON,
+                                                                    'v_var':v_var_JSON,
+                                                                    'title':chart_title_JSON})
+    else:
+        return render(request, 'RoboStockApp/watchlists.html')
+
 def setPlt(stock_quote):
 
     #Get the stock quote

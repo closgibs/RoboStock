@@ -8,6 +8,7 @@ urlpatterns = [
 #    path('',views.index,name = 'index'),
     path('home/',views.home,name='home'),
     path('marketindexes/',views.marketindexes,name='marketindexes'),
+    path('watchlists/',views.watchlists,name='watchlists'),
     path('mlpredictions/',views.MLpredictions,name='MLpredictions'),
     path('user_login/',views.user_login,name='user_login'),
     path('register/',views.register,name='register'),
