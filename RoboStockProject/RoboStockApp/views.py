@@ -17,13 +17,14 @@ from keras.models import Sequential
 from keras.layers import Dense, LSTM
 
 #Dont' need this
-#import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
 
 import io
 
 from datetime import datetime, timedelta
 
 # Create your views here.
+
 def index (request):
     return render(request,'RoboStockApp/index.html')
 
@@ -259,7 +260,7 @@ def watchlists (request):
 def setPlt(stock_quote):
 
     #Get the stock quote
-    stock_key = stock_quote
+    stock_key = 'TSLA'
     df = web.DataReader(stock_key, data_source = 'yahoo', start = '2012-01-01', end = '2020-12-18')
     #Get the number of rows and columns in the data set
     df.shape
@@ -373,14 +374,21 @@ def setPlt(stock_quote):
     plt.plot(valid[['Close', 'Predictions']])
     plt.legend(['Historical Stock Price Data','Actual Values','SLTM Predictions'], loc = 'lower right')
 
-#This view converts the plot to an SVG
 def pltToSvg():
+    #This view converts the plot to an SVG
     buf = io.BytesIO()
     plt.savefig(buf, format='svg', bbox_inches='tight')
     s = buf.getvalue()
     buf.close()
     return s
 
+def get_svg(request):
+    #This is the get request that returns the SVG
+    setPlt('TSLA') # create the plot
+    svg = pltToSvg() # convert plot to SVG
+    plt.cla() # clean up plt so it can be re-used
+    response = HttpResponse(svg, content_type='image/svg+xml')
+    return response
 
 def MLpredictions (request):
 

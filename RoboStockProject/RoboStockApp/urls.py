@@ -12,4 +12,6 @@ urlpatterns = [
     path('mlpredictions/',views.MLpredictions,name='MLpredictions'),
     path('user_login/',views.user_login,name='user_login'),
     path('register/',views.register,name='register'),
+
+    path('svg/',views.get_svg,name='AppleStockMLsvg')
     ]
