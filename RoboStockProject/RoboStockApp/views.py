@@ -398,8 +398,8 @@ def MLpredictions (request):
     if request.method == 'POST':
 
         stock_quote = request.POST.get('stock_quote')
-        start = request.POST.get('start')
-        end =  request.POST.get('end')
+        start = request.POST.get('start_date')
+        end =  request.POST.get('end_date')
 
         print(stock_quote,start,end)
 
