@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+{% extends "RoboStockApp/base.html" %}
+{% load static %}
+  {% block body_block %}
+  <div class="container">
+    <div class="jumbotron">
+      <h1>Machine Learning Algorithm Information</h1>
+      <p>This pdf includes detailed information on how the LSTM algorithm works.</p>
+    </div>
+  </div>
+  <div class="container">
+    <embed src="{% static "RoboStockApp/pdf/machinelearningalgorithm.pdf" %}" width="1800px" height="2100px" class="center" />
+  </div>
+
+  {% endblock %}
