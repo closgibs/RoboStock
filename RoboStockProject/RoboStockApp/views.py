@@ -229,20 +229,17 @@ def MLpredictions (request):
         start = request.POST.get('start_date')
         end =  request.POST.get('end_date')
 
-        print(stock_quote,start,end)
-
         df = web.DataReader(stock_quote, data_source = 'yahoo', start = start, end = end)
-        #Get the number of rows and columns in the data set
 
         #Create a new dataframe with only the 'Close' column
         data = df.filter(['Close'])
         #Convert the dataframe to a numpy array
         dataset = data.values
-        #Get the number of rows to train the LSTM model on. This is taking 80% of the entries. What happens when you take all of it?
-        training_data_len = math.ceil(len(dataset)*.8)
+        #Define the number of rows to train the LSTM model on. This is taking 80% of the entries.
+        training_data_len = math.ceil(len(dataset)*.9)
 
         #Scale the data, Why scale? in practice it is nearly always advantagoues to apply pre processing or scaling of the data before
-        #presenting it to the neural network. What happens if you don't scale the data?
+        #presenting it to the neural network.
         scaler = MinMaxScaler(feature_range=(0,1))
         scaled_data = scaler.fit_transform(dataset)
 
