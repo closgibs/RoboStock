@@ -3,54 +3,42 @@
   {% block body_block %}
   <div class="container">
     <div class="jumbotron">
-      <h1>Welcome To RoboStock!</h1>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      <h1>Machine Learning Stock Price Predictions</h1>
+      <p>Please select a stock quote (stock symbol), start date, and end date, in order to render historical closing stock prices and the LSTM stock price predictions</p>
     </div>
-
   </div>
   <div class="container">
-    <h2>Machine Learning Predictions</h2>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    <form action="{% url 'RoboStockApp:MLpredictions' %}" method="post">
+        {% csrf_token %}
+
+        <label for="stock_symbol">Choose Stock Quote:</label>
+        <select name="stock_quote" id="stock_quote">
+          <option value="">Select a Stock Symbol</option>
+          <option value="">AAPL</option>
+          <option value="TSLA">TSLA</option>
+          <option value="GOOGL">GOOGL</option>
+          <option value="MRNA">MRNA</option>
+          <option value="VZ">VZ</option>
+          <option value="FB">FB</option>
+          <option value="JNJ">JNJ</option>
+          <option value="NKE">NKE</option>
+          <option value="COKE">COKE</option>
+        </select>
+
+        <label for="start">Start date:</label>
+        <input type="date" id="start" name="start_date"
+                value="2020-01-01"
+                min="2012-01-01" max="2021-04-29">
+
+        <label for="end">End Date:</label>
+        <input type="date" id="end" name="end_date"
+                value="2021-04-22"
+                min="2012-01-01" max="2021-04-29">
+
+
+        <input type="submit" name="" value="Run ML Algorithm">
+    </form>
   </div>
-
-  <form action="{% url 'RoboStockApp:MLpredictions' %}" method="post">
-      {% csrf_token %}
-
-      <label for="cars">Choose Stock Quote:</label>
-
-      <select name="stock_quote" id="stock_quote">
-        <option value="AAPL">AAPL</option>
-        <option value="TSLA">TSLA</option>
-        <option value="GOOGL">GOOGL</option>
-        <option value="MRNA">MRNA</option>
-      </select>
-
-      <label for="cars">Epochs:</label>
-
-      <select name="epochs" id="epochs">
-        <option value= "1" >1</option>
-        <option value= "2" >2</option>
-        <option value= "3" >3</option>
-        <option value= "4" >4</option>
-      </select>
-
-      <label for="start">Start date:</label>
-
-      <input type="date" id="start" name="start"
-              value=""
-              min="2012-01-01" max="2021-04-29">
-
-      <label for="end">End Date:</label>
-
-      <input type="date" id="end" name="end"
-              value=""
-              min="2012-01-01" max="2021-04-29">
-
-
-      <input type="submit" name="" value="Run ML Algorithm">
-  </form>
 
   <!--Load the AJAX API-->
   <!-- AJAX is short for "Asynchronous JavaScript and XML" is a set of web develompent techniques using many web technologies on the client-side to create asynchronous web applications -->

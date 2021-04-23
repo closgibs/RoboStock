@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 {% extends "RoboStockApp/base.html" %}
-{% load static %}
   {% block body_block %}
   <div class="container">
     <div class="jumbotron">
@@ -8,7 +7,31 @@
       <p>This interactive Web Application seeks to demonstrate to users one of the many Machine Learning applications. By using an LSTM (Long-Short Term Memory) Machine Learning Algorithm, this application attempts to predicts stock prices based on the historical closing price time-series data for the selected stock. The historical closing stock price is queried from Yahoo Finance. Scikit-learn and Keras are the machine learning libraries used for executing the LSTM algorithm. The graphs are rendered using Google Charts in order to provide the users with some level of interaction. </p>
       <p>DISCLAIMER: THIS PROJECT, REPORT, WORK PRODUCTS, AND WEB APPLICATION ARE FOR EDUCATION PURPOSES ONLY. ALL RELATED WORK INCLUDING DATA, MIDTERM, AND FINAL REPORTS, DEMONSTRATIONS, SOURCE CODE, DO NOT INTEND TO PROVIDE ANY REAL SECURITIES, EQUITY, STOCK, BONDS, ETF, ETC. TRADING ADVICE. DO NOT USE ANY OF THIS INFORMATION FOR MAKING SECURITIES TRADING DECISIONS IN THE NEW YORK STOCK EXCHANGE OR ANY OTHER MARKET, DOMESTIC OR FOREIGN.</p>
     </div>
+
+  </div>
   <div class="container">
-    <img src="{% static "RoboStockApp/images/RoboStock.jpeg" %}" alt="RoboStock" class="center">
+    <h2>Index</h2>
+
+    <h4>Home</h4>
+    <p>Web application's Home Page and index</p>
+
+    <h4>Market Indexes</h4>
+    <p>Major U.S. Stock Exchange Indexes Information</p>
+
+    <h4>ML Predictions</h4>
+    <p>Interactive stock price prediction page</p>
+
+
+    <h4>Additional Resources</h4>
+
+    <h5>Machine Learning Algorithm</h5>
+    <p>Machine Learning and LSTM Basics</p>
+
+    <h5>Go to Yahoo Finance</h5>
+    <p>Navigage to Yahoo Finance</p>
+
+    <h5>About</h5>
+    <p>Additional Information about the website</p>
+
   </div>
   {% endblock %}
