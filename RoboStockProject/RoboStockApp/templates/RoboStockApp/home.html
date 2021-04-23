@@ -9,29 +9,55 @@
     </div>
 
   </div>
-  <div class="container">
-    <h2>Index</h2>
+  <div class="centered_text">
+    <h2>Website Index</h2>
 
-    <h4>Home</h4>
+    <h4>
+      <a href="{% url 'RoboStockApp:home'%}">
+        Home
+      </a>
+    </h4>
     <p>Web application's Home Page and index</p>
 
-    <h4>Market Indexes</h4>
+    <h4>
+      <a href="{% url 'RoboStockApp:marketindexes'%}">
+        Market Indexes
+      </a>
+    </h4>
     <p>Major U.S. Stock Exchange Indexes Information</p>
-
-    <h4>ML Predictions</h4>
-    <p>Interactive stock price prediction page</p>
-
-
+    {% if user.is_authenticated %}
+      <h4>
+        <a href="{% url 'RoboStockApp:MLpredictions'%}">
+          ML Predictions
+        </a>
+      </h4>
+      <p>Interactive stock price prediction page</p>
+    {% else %}
+      <h4>ML Predictions</h4>
+      <p>Interactive stock price prediction page</p>
+    {% endif %}
     <h4>Additional Resources</h4>
 
-    <h5>Machine Learning Algorithm</h5>
+    <h5>
+      <a href="{% url 'RoboStockApp:machinelearningalgorithm' %}">
+        Machine Learning Algorithm
+      </a>
+    </h5>
     <p>Machine Learning and LSTM Basics</p>
 
-    <h5>Go to Yahoo Finance</h5>
+    <h5>
+      <a href="https://finance.yahoo.com/">
+        Go to Yahoo Finance
+      </a>
+    </h5>
     <p>Navigage to Yahoo Finance</p>
 
-    <h5>About</h5>
-    <p>Additional Information about the website</p>
+    <h5>
+      <a href="https://www.linkedin.com/in/closgibs/">
+        Carlos Gibson's LinkedIn
+      </a>
+    </h5>
+    <p>The LinkedIn profile page of Carlos Gibson, the creator of this site.</p>
 
   </div>
   {% endblock %}

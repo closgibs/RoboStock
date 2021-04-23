@@ -69,7 +69,7 @@ def marketindexes (request):
 
     ########## S&P 500 Index Day Change ##############
     now = datetime.today()
-    yesterday = datetime.today() - timedelta(days=4)
+    yesterday = datetime.today() - timedelta(days=2)
     now = str(now)
 
     stock_key = '^GSPC'
@@ -84,19 +84,8 @@ def marketindexes (request):
     SPdayChange = round(SPtodayClose - SPyesterdayClose, 2)
     SPpercentageChange = round((SPdayChange/SPyesterdayClose) * 100, 2)
 
-    #SPdayChange = -56
-    #SPpercentageChange = -.05
-
-    if SPdayChange >= 0:
-        SPdayChangeSign = "+"
-    else:
-        SPdayChangeSign = ""
-
     SPdayChange = str(SPdayChange)
     SPpercentageChange = str(SPpercentageChange)
-
-    SPdayChange = SPdayChangeSign + SPdayChange
-    SPpercentageChange = SPdayChangeSign + SPpercentageChange
 
     ########## S&P 500 Index Day Change END ##########
 
@@ -217,6 +206,54 @@ def marketindexes (request):
                                                                 'values2':modified_data2,
                                                                 'h_title2':h_var_JSON2,
                                                                 'v_title2':v_var_JSON2,})
+
+def watchlists (request):
+
+    if request.method == 'POST':
+
+        stock_symbol = request.POST.get('stock_quote')
+        df = web.DataReader(stock_symbol, data_source= 'yahoo', start = '2020-01-01', end = '2022-04-29')
+        data = df.filter(['Close'])
+        df['Date'] = df.index
+        df['Date'] = df['Date'].astype(str)
+        df = df[['Date','Close']]
+        data = df.values.tolist()
+        data.insert(0,['Date','Close'])
+        h_var = "Date"
+        v_var = "Closing Stock Price USD ($)"
+        h_var_JSON = json.dumps(h_var)
+        v_var_JSON = json.dumps(v_var)
+        modified_data = json.dumps(data)
+        chart_title_JSON = json.dumps(stock_symbol)
+
+        now = datetime.today()
+        yesterday = datetime.today() - timedelta(days=2)
+        now = str(now)
+
+        df = web.DataReader(stock_symbol, data_source = 'yahoo', start = yesterday, end = now)
+        df = df['Close']
+        data = df.values.tolist()
+        data
+
+        yesterdayClose = round(data[0], 2)
+        todayClose = round(data[1], 2)
+
+        dayChange = round(todayClose - yesterdayClose, 2)
+        percentageChange = round((dayChange/yesterdayClose) * 100, 2)
+
+        dayChange = str(dayChange)
+        percentageChange = str(percentageChange)
+
+        return render(request,'RoboStockApp/watchlists.html',{'TodayClose':todayClose,
+                                                                    'DayChange':dayChange,
+                                                                    'PercentageChange':percentageChange,
+
+                                                                    'values':modified_data,
+                                                                    'h_title':h_var_JSON,
+                                                                    'v_title':v_var_JSON,
+                                                                    'title':chart_title_JSON})
+    else:
+        return render(request, 'RoboStockApp/watchlists.html')
 
 def MLpredictions (request):
 
@@ -433,45 +470,6 @@ def user_login(request):
     else:
         #Nothing has been provided for the username and password
         return render(request, 'RoboStockApp/login.html',{})
-
-def watchlists (request):
-
-    if request.method == 'POST':
-
-        stock_symbol = request.POST.get('stock_quote')
-
-        df = web.DataReader(stock_symbol, data_source= 'yahoo', start = '2020-01-01', end = '2022-04-29')
-
-        data = df.filter(['Close'])
-
-        df['Date'] = df.index
-
-        df['Date'] = df['Date'].astype(str)
-
-        df = df[['Date','Close']]
-
-        data = df.values.tolist()
-
-        data.insert(0,['Date','Close'])
-
-        h_var = "Date"
-
-        v_var = "Closing Stock Price USD ($)"
-
-        h_var_JSON = json.dumps(h_var)
-
-        v_var_JSON = json.dumps(v_var)
-
-        modified_data = json.dumps(data)
-
-        chart_title_JSON = json.dumps(stock_symbol)
-
-        return render(request,'RoboStockApp/watchlists.html',{'values':modified_data,
-                                                                    'h_title':h_var_JSON,
-                                                                    'v_title':v_var_JSON,
-                                                                    'title':chart_title_JSON})
-    else:
-        return render(request, 'RoboStockApp/watchlists.html')
 
 def setPlt(stock_quote):
 

@@ -1,25 +1,25 @@
 #SPDayChange{
-  color: red;
+  color: green;
 }
 
 #SPDayPercentageChange{
-  color: red;
+  color: green;
 }
 
 #NASDAQDayChange{
-  color: red;
+  color: green;
 }
 
 #NASDAQDayPercentageChange{
-  color: red;
+  color: green;
 }
 
 #DOWJONESDayChange{
-  color: red;
+  color: green;
 }
 
 #DOWJONESDayPercentageChange{
-  color: red;
+  color: green;
 }
 
 .center {
@@ -27,4 +27,8 @@
   margin-left: auto;
   margin-right: auto;
   width: 50%;
+}
+
+div.centered_text {
+  text-align: center;
 }

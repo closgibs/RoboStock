@@ -86,6 +86,13 @@
 
       <body>
         <!--Div that will hold the dashboard-->
+        <div class="container-fluid">
+          <!-- <h3>S&P 500 (^GSPC)</h3> -->
+          <h5 style="display: inline;">$ {{ TodayClose }}</h5>
+          <b id = 'DayChange' style="display: inline;">$ {{ DayChange }}</b>
+          <b id = 'DayPercentageChange' style="display: inline;">({{ PercentageChange }} %)</b>
+        </div>
+
         <div id="dashboard_div">
           <!--Divs that will hold each control and chart-->
           <div id="chart_div"></div>
