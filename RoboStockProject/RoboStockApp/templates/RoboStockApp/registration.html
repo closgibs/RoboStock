@@ -13,9 +13,7 @@
         <form enctype="multipart/form-data" method="POST">
           {% csrf_token %}
           {{ user_form.as_p }}
-        <div>
-          <h3>Portfolio Site and Profile Pic are Optional<h3>
-        </div>
+
           {{ profile_form.as_p }}
           <input type="submit" name="" value="Register">
         </form>
