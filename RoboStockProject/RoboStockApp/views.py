@@ -69,7 +69,7 @@ def marketindexes (request):
 
     ########## S&P 500 Index Day Change ##############
     now = datetime.today()
-    yesterday = datetime.today() - timedelta(days=2)
+    yesterday = datetime.today() - timedelta(days=4)
     now = str(now)
 
     stock_key = '^GSPC'
@@ -227,7 +227,7 @@ def watchlists (request):
         chart_title_JSON = json.dumps(stock_symbol)
 
         now = datetime.today()
-        yesterday = datetime.today() - timedelta(days=2)
+        yesterday = datetime.today() - timedelta(days=4)
         now = str(now)
 
         df = web.DataReader(stock_symbol, data_source = 'yahoo', start = yesterday, end = now)
